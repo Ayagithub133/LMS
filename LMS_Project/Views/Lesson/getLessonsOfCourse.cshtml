@@ -1,0 +1,138 @@
+﻿@*@model IEnumerable<LMS_Project.Models.Lesson>*@
+
+@using LMS_Project.Models
+@{
+    List<Lesson> Lesson = (List < Lesson >)ViewBag.Lessons;
+    var count = 0;
+    var x = 1;
+    var passdata = 0;
+
+    Layout = "~/Views/Shared/_LayoutInstructor.cshtml";
+}
+
+        @using (Html.BeginForm("getLessonsOfCourse", "Lesson", new { action = "getLessonsOfCourse", controller = "Lesson" }, FormMethod.Get))
+{
+    @Html.AntiForgeryToken()
+    <div class="main-content-inner">
+        <div class="card-area">
+            <div class="row">
+                @foreach (var item in Lesson)
+                {
+                    passdata = item.LessonId;
+                    if (count != 0 && count % 4 == 0)
+                    {
+                    @:</div>
+                    @:<div class="row">
+                    }
+
+
+                          <div class="col-md-4">
+                              <div style="margin-bottom:10px;"><h6 class="glyphicon-text-color">Lesson @x</h6></div>
+                              <div class="embed-responsive embed-responsive-21by9">
+                                  <video class="embed-responsive-item" controls>
+                                      <source src="~/Videos/@item.video" type="video/mp4" />
+                                  </video>
+                              </div>
+                              <div class="row">
+                                  <div class="col-md-6">
+                                      <button type="button" class="btn btn-primary " data-toggle="modal" data-target="#exampleModelLong" style="margin-top:10px;" onclick="model('@item.LessonTitle','@item.TextContent');">
+                                          Open Document
+                                      </button>
+                                  </div>
+                                  <div class="col-md-6" style="margin-top:30px;">
+                                      <div class="pull-right">
+
+                                          <h6 class="text-success dropdown-toggle" data-toggle="dropdown">Action</h6>
+                                          <div class="dropdown-menu">
+                                              @Html.ActionLink("Edit", "EditLesson", new { action = "EditLesson", controller = "Lesson", id = item.LessonId }, new { @class = "dropdown-item" })
+
+                                              <button type="button" class="dropdown-item" data-toggle="modal" data-target="#exampleModal">Delete</button>
+                                          </div>
+                                      </div>
+                                  </div>
+                              </div>
+
+                           </div>      
+
+                                  count++;
+                                  x++;
+
+                 }
+         </div>
+        </div>
+    </div>
+    <!-- model -->
+    <div class="modal fade" id="exampleModelLong" tabindex="-1" role="dialog" aria-labelledby="exampleModelLongTitle" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModelLongTitle"></h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+
+
+                </div>
+                <div class="modal-body">
+                    <div class="embed-responsive border-0 embed-responsive-16by9 ">
+                        <iframe class="embed-responsive-item modal-scrollbar-measure" id="ifram" src="~/TextFiles/" scrolling="auto">
+                        </iframe>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+}
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel"></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                @using (Html.BeginForm("DeleteLesson", "Lesson", new { action = "DeleteLesson", controller = "Lesson" }, FormMethod.Post))
+                {
+                    <h5 class="text-danger" style="margin-top:50px;margin-bottom:50px;">
+                        Are You Sure ?
+                    </h5>
+                    <div class="modal-footer">
+                        <input type="hidden" value="@passdata" name="id" />
+                        <input type="submit" class="btn btn-danger" value="Delete" />
+                    </div>
+                }
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+
+
+<script type="text/javascript">
+
+    function model(title, content) {
+        var path = 'https://localhost:44353/TextFiles/';
+        document.getElementById('exampleModelLongTitle').innerHTML = title;
+        if (document.getElementById('ifram').src == path) {
+            document.getElementById('ifram').src += content;
+
+        }
+        else {
+            document.getElementById('ifram').src = path + content;
+
+        }
+
+
+
+    }
+
+</script>
+

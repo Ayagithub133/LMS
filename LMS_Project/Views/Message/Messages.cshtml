@@ -1,0 +1,101 @@
+﻿@model IEnumerable<LMS_Project.ViewModels.UserMessage>
+@using LMS_Project.Models
+@{
+    Instructor ins = Session["Instructor"] as Instructor;
+}
+
+@if (Model != null)
+{
+    foreach (var item in Model)
+    {
+        if (item.From == ("From" + ins.InsId))
+        {
+            <style>
+                .TextStyle
+                {
+                    background-color:blue;
+                    border-radius:5px;
+                    margin-bottom:3px;
+                    width:auto;
+                    padding:3px;
+                }
+            </style>
+            
+
+
+        }
+        else
+        {
+            <style>
+                .TextStyle {
+                    background-color:aliceblue;
+                    border-radius: 5px;
+                    margin-bottom: 3px;
+                    width: auto;
+                    padding: 3px;
+                }
+            </style>
+            
+
+        }
+
+        <div class="row">
+            <div class="col-md-1">
+                <div class="thumbnail">
+                    <img src="~/Upload/@ins.InsImage" style="border-radius:100%;width:50px;height:50px" />
+                </div>
+            </div>
+            @if (item.Type == "TEXT")
+            {
+            <div class="TextStyle">
+                <p style="color:white">
+                    @item.Message
+                </p>
+            </div>
+            }
+            else if (item.Type == "VIDEO")
+            {
+                <div class="col-md-5">
+                    <div class="embed-responsive embed-responsive-21by9">
+                        <video class="embed-responsive-item" controls>
+                            <source src="~/Videos/@item.Message" type="video/mp4" />
+                        </video>
+                    </div>
+                  </div>
+            }
+            else if (item.Type == "AUDIO")
+            {
+                <div class="col-md-5">
+                    <div class="embed-responsive embed-responsive-21by9" >
+                        <audio class="embed-responsive-item" controls>
+                            <source src="~/Videos/@item.Message" type="audio/mp3" />
+                        </audio>
+                    </div>
+                    </div>
+            }
+            else if (item.Type == "IMAGE")
+            {
+                <div class="col-md-4 ">
+                    <img class="img-fluid img-thumbnail" src="~/Upload/@item.Message" />
+                </div>
+            }
+
+
+                </div>
+            <div class="row" style="margin-bottom:40px">
+                <div class="col-md-1"></div>
+                <div>
+                    <p class="text-gray">
+                        @item.TimeSend
+                    </p>
+                </div>
+            </div>
+        <div class="row"></div>
+    }
+}
+else
+{
+}
+<script src="~/Scripts/jquery-3.4.1.min" type="text/javascript">
+    $.d
+</script>

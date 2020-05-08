@@ -1,0 +1,74 @@
+﻿@{ Layout = "~/Views/Shared/_Layout.cshtml";}
+<section>
+    <div class="container">
+       
+        <div class="row">
+            <div class="col-md-2"></div>
+            <div class="col-md-8 col-sm-8 ">
+                @using (Html.BeginForm("SignUp", "Account", new { action = "SignUp", Controller = "Account" }, FormMethod.Post, new { enctype = "multipart/form-data" }))
+                {
+                    @Html.AntiForgeryToken()
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                @*<label class="control-label">First Name</label>*@
+                                <input type="text" class="form-control inputt input-lg" placeholder="First Name" name="FName">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @*<label class="control-label">Last Name</label>*@
+                        <input type="text" class="form-control inputt input-lg" placeholder="Last Name" name="LName">
+                    </div>
+                    <div class="form-group">
+                        @*<label class="control-label">Email</label>*@
+                        <input type="email" class="form-control inputt input-lg" placeholder="Email" name="Email">
+                    </div>
+                    <div class="form-group">
+                        @*<label class="control-label">Password</label>*@
+                        <input type="password" class="form-control input-lg inputt" placeholder="Password" name="Password">
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label">Your Image</label>
+                        <input type="file" class="form-control inputt input-lg" name="upload">
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label">Introductory Video</label>
+                        <input type="file" class="form-control inputt input-lg" name="upload">
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label">What's your expertise</label>
+                        <textarea class="form-control inputt input-lg" rows="10" name="Experties"></textarea>
+                    </div>
+                    <div class="form-group">
+                       
+                        <select class="form-control inputt input-lg " name="value">
+                            <option selected>Login as</option>
+                            <option>Instructor</option>
+                            <option>Student</option>
+                        </select>
+                    </div>
+                    <div class="submit-btn-area">
+                        <button id="form_submit" type="submit">Submit <i class="ti-arrow-right"></i></button>
+                        <div class="login-other row mt-4">
+                            <div class="col-6">
+                                <a class="fb-login" href="#">Sign up with <i class="fa fa-facebook"></i></a>
+                            </div>
+                            <div class="col-6">
+                                <a class="google-login" href="#">Sign up with <i class="fa fa-google"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-footer text-center mt-5">
+                        <p class="text-muted">Don't have an account?  @Html.ActionLink("Sign in", "SignIn", new { action = "SignIn", controller = "Account" })</p>
+                    </div>
+
+                }
+            </div>
+            
+           
+        </div>
+    </div>
+</section>

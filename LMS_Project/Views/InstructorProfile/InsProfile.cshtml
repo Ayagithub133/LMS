@@ -1,0 +1,91 @@
+﻿@using LMS_Project.ViewModels
+@model LMS_Project.Models.Instructor
+@{
+
+    Layout = "~/Views/Shared/_LayoutInstructor.cshtml";
+}
+
+@using (Html.BeginForm("InsProfile", "InstructorProfile", new { action = "InsProfile", controller = "InstructorProfile" }, FormMethod.Get))
+{
+
+    <div class="main-content-inner card">
+
+        @if (Convert.ToInt32(Session["Id"]) !=LoginViewModel.InsId)
+        {
+        <div class="row">
+            <div class="col-md-1">
+            </div>
+            <div class="col-md-3">
+               @Html.ActionLink("Send Message", "AddMessage", "Message")
+            </div>
+        </div>
+        }
+
+            <div class="row">
+                <div class="col-md-6">
+
+                    <div class="card-body">
+                        <img class="img-thumbnail" src="~/Upload/@Model.InsImage" width="400" height="300" />
+                    </div>
+                </div>
+
+                @if (Model.Online)
+                {
+                    <div style="width:25px;height:25px;border-radius:100%;background-color:green;margin-left:-70px"></div>
+                }
+                else
+                {
+                    <div style="width:25px;height:25px; border-radius:100%;background-color:red;margin-left:-70px"></div>
+                }
+            </div>
+            <div class="row" style="margin-top:20px">
+                <div class="col-md-12">
+                    <h5 class="text-primary">
+                        About Me
+                    </h5>
+                </div>
+                <div class="col-md-1"></div>
+                <div class="col-md-10" style="margin:50px;background-color:aliceblue;height:300px">
+                    <p class="text-pink">
+                        @Model.Experties
+                    </p>
+                </div>
+            </div>
+            <div class="row" style="margin-top:50px">
+                <div class="col-md-12">
+                    <h5 class="text-primary">
+                        My Introductive Video
+                    </h5>
+                </div>
+            </div>
+            <div class="row" style="margin-top:50px">
+                <div class="col-md-12">
+                    <div class="embed-responsive embed-responsive-21by9">
+
+                        <video class="embed-responsive-item" controls>
+                            <source src="~/Videos/@Model.IntrVideo" type="video/mp4" />
+                        </video>
+                    </div>
+                </div>
+            </div>
+            @*<div class="row">
+
+        <div class="col-md-6 clearfix pull-left">
+            <div class="user-profile pull-left">
+
+
+                @Html.ActionLink("My Course", "MyCourses", new { action = "MyCourses", controller = "InstructorProfile" }, new { @class = "text-lg-center" })
+
+            </div>
+        </div>*@
+        </div>
+
+
+       
+        @Html.Partial("Courses", Model.courses)
+   
+}
+
+
+
+

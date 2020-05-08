@@ -1,0 +1,36 @@
+﻿
+@using LMS_Project.ViewModels
+@{
+
+    Layout = "~/Views/Shared/_LayoutInstructor.cshtml";
+    User user = (User)Session["Lists"];
+
+
+}
+
+@using (Html.BeginForm("SearchResult", "Account", new { action="SearchResult",controller="Account"},FormMethod.Get,new { @id = "formm" }))
+{
+    if (user.Instructors != null)
+    {
+        foreach (var item in user.Instructors)
+        {
+             <div class="row" style="margin-bottom:10px;">
+                 <div  class="col-md-1"style="width:20px;height:20px">
+                     <img src="~/Upload/@item.InsImage" />
+                 </div>
+                     <div class="col-md-2 align-bottom"style="margin-top:40px;margin-left:-20px" >
+                         @*<p class="align-bottom">@item.FName @item.LName</p>*@
+                         @Html.ActionLink(item.FName+" "+item.LName,"InsProfile","InstructorProfile",new { id = item.InsId },new { @class = "align-bottom" })
+                     </div>
+                 
+             </div>
+            
+        }
+    }
+
+
+}
+
+<script>
+    document.getElementById('id').setAttribute('height', '100px');
+</script>

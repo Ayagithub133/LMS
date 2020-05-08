@@ -1,0 +1,190 @@
+﻿  
+@using LMS_Project.ViewModels
+
+
+
+<!DOCTYPE html>
+
+<html>
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>srtdash - ICO Dashboard</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" type="image/png" href="~/Content/images/icon/favicon.ico">
+    <link rel="stylesheet" href="~/Content/css/bootstrap.min.css" type="text/css">
+    <link rel="stylesheet" href="~/Content/css/font-awesome.min.css" type="text/css">
+    <link rel="stylesheet" href="~/Content/css/themify-icons.css" type="text/css">
+    <link rel="stylesheet" href="~/Content/css/metisMenu.css" type="text/css">
+    <link rel="stylesheet" href="~/Content/css/owl.carousel.min.css" type="text/css">
+    <link rel="stylesheet" href="~/Content/css/slicknav.min.css" type="text/css">
+    <!-- amchart css -->
+    <link rel="stylesheet" href="https://www.amcharts.com/lib/3/plugins/export/export.css" type="text/css" media="all" />
+    <!-- others css -->
+    <link rel="stylesheet" href="~/Content/css/typography.css" type="text/css">
+    <link rel="stylesheet" href="~/Content/css/default-css.css" type="text/css">
+    <link rel="stylesheet" href="~/Content/css/styles.css" type="text/css">
+    <link rel="stylesheet" href="~/Content/css/responsive.css" type="text/css">
+    <!-- modernizr css -->
+
+</head>
+<body>
+    @*<div id="preloader">
+            <div class="loader"></div>
+        </div>*@
+    <div class="page-container">
+        <!-- sidebar menu area start -->
+        <div class="sidebar-menu">
+            <div class="sidebar-header">
+                <div class="logo">
+                    <a href="index.html"><img src="~/Content/images/icon/logo.png" alt="logo"></a>
+                </div>
+            </div>
+            <div class="main-menu">
+                <div class="menu-inner">
+                    <nav>
+                        <ul class="metismenu" id="menu">
+                            <li class="active">
+
+                                @Html.ActionLink("New Course", "AddCourse", new { action = "AddCourse", controller = "Course" })
+                            </li>
+                            
+                            <li>
+                                <a href="javascript:void(0)" aria-expanded="true"><i class="ti-pie-chart"></i><span>Quizes</span></a>
+                                <ul class="collapse">
+                                    <li><a href="#">New Quize</a></li>
+                                    <li><a href="#">Last Quizes</a></li>
+                                    <li><a href="#">Results</a></li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a href="javascript:void(0)" aria-expanded="true"><i class="ti-palette"></i><span>Send Message</span></a>
+
+                            </li>
+
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
+        <!-- sidebar menu area end -->
+        <!-- main content area start -->
+        <div class="main-content">
+            <!-- header area start -->
+            <div class="header-area">
+                <div class="row align-items-center">
+                    <!-- nav and search button -->
+                    <div class="col-md-6 col-sm-8 clearfix">
+                        <div class="nav-btn pull-left">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </div>
+                        <div class="search-box pull-left">
+                            @*<form action="#">
+                                <div class="row">
+                                    <div class="col-md-8">
+                                        <input type="text" name="search" placeholder="Search By Name.." required style="width:320px">
+                                        <i class="ti-search"></i>
+                                    </div>
+
+                                    <div class="input-group col-md-4" style="width:150px">
+
+                                        <select class=" form-control" name="type">
+
+                                            <option disabled selected>Search On</option>
+                                            <option value="Student">Student</option>
+                                            <option value="Instructor">Instructor</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+
+                            </form>*@
+                            @Html.Partial("Search")
+                        </div>
+                    </div>
+                    <!-- profile info & task notification -->
+                    <div class="col-md-6 col-sm-4 clearfix">
+                        <ul class="notification-area pull-right">
+
+                            <li class="dropdown">
+                                <i class="ti-bell dropdown-toggle" data-toggle="dropdown">
+                                    <span>2</span>
+                                </i>
+
+                            </li>
+                            <li class="dropdown">
+                                <i class="fa fa-envelope-o dropdown-toggle" data-toggle="dropdown"><span>3</span></i>
+
+                            </li>
+
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <!-- header area end -->
+            <!-- page title area start -->
+            <div class="page-title-area">
+                <div class="row align-items-center">
+                    <div class="col-sm-6">
+                        <div class="breadcrumbs-area clearfix">
+                            <h4 class="page-title pull-left">Dashboard</h4>
+                            <ul class="breadcrumbs pull-left">
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 clearfix">
+                        <div class="user-profile pull-right">
+                            <img class="avatar user-thumb" src="~/Upload/@LoginViewModel.Image" alt="avatar">
+                            <h4 class="user-name dropdown-toggle" data-toggle="dropdown">@LoginViewModel.FName @LoginViewModel.LName <i class="fa fa-angle-down"></i></h4>
+                            <div class="dropdown-menu">
+
+
+                                @Html.ActionLink("Edit Profile", "EditProfile", new { action = "EditProfile", controller = "InstructorProfile" }, new { @class = "dropdown-item" })
+                               
+                                @Html.ActionLink("Log Out","Logout","Account", new { action = "Logout", controller = "Account" }, new { @class = "dropdown-item" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- page title area end -->
+
+            @RenderBody()
+
+        </div>
+
+        <!-- main content area end -->
+
+    </div>
+    <script src="~/Scripts/js/vendor/modernizr-2.8.3.min.js" type="text/javascript"></script>
+    <script src="~/Scripts/js/vendor/jquery-2.2.4.min.js" type="text/javascript"></script>
+    <!-- bootstrap 4 js -->
+    <script src="~/Scripts/js/popper.min.js" type="text/javascript"></script>
+    <script src="~/Scripts/js/bootstrap.min.js" type="text/javascript"></script>
+    <script src="~/Scripts/js/owl.carousel.min.js" type="text/javascript"></script>
+    <script src="~/Scripts/js/metisMenu.min.js" type="text/javascript"></script>
+    <script src="~/Scripts/js/jquery.slimscroll.min.js" type="text/javascript"></script>
+    <script src="~/Scripts/js/jquery.slicknav.min.js" type="text/javascript"></script>
+
+    <!-- start chart js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.min.js"></script>
+    <!-- start highcharts js -->
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <!-- start zingchart js -->
+    <script src="https://cdn.zingchart.com/zingchart.min.js"></script>
+    <script>
+        zingchart.MODULESDIR = "https://cdn.zingchart.com/modules/";
+        ZC.LICENSE = ["569d52cefae586f634c54f86dc99e6a9", "ee6b7db5b51705a13dc2339db3edaf6d"];
+    </script>
+    <!-- all line chart activation -->
+    <script src="~/Scripts/js/line-chart.js" type="text/javascript"></script>
+    <!-- all pie chart -->
+    <script src="~/Scripts/js/pie-chart.js" type="text/javascript"></script>
+    <!-- others plugins -->
+    <script src="~/Scripts/js/plugins.js" type="text/javascript"></script>
+    <script src="~/Scripts/js/scripts.js"></script>
+</body>
+</html>

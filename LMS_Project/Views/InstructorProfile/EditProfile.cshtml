@@ -1,0 +1,68 @@
+﻿@model LMS_Project.Models.Instructor
+@{
+
+    Layout = "~/Views/Shared/_LayoutInstructor.cshtml";
+}
+
+
+
+<div class="main-content-inner">
+    <div class="row">
+        <div class="col-lg-6 col-ml-12">
+            <div class="row">
+                <!-- Textual inputs start -->
+                <div class="col-12 mt-5">
+                    <div class="card">
+                        <div class="card-body">
+                            <h4 class="header-title">Edit Profile</h4>
+
+                            @using (Html.BeginForm("EditProfile", "InstructorProfile", new { action = "EditProfile", controller = "InstructorProfile" }, FormMethod.Post, new { enctype = "multipart/form-data" }))
+                            {
+                                <div class="input-group mb-3">
+                                    <label class="col-form-label col-md-2">AVATAR</label>
+                                    <input type="file" class="form-control" name="upload" id="inputfile" value="@Model.InsImage">
+                                </div>
+                                <div class="input-group mb-3">
+                                    <label class="col-form-label col-md-2 "> Full Name</label>
+
+                                    <input type="text" id="FName" name="FName" class="form-control col-md-4" placeholder="@Model.FName" value="@Model.FName" aria-describedby="basic-addon1">
+
+                                    <input type="text" id="LName" name="LName" class="form-control col-md-6" placeholder="@Model.LName" value="@Model.LName" aria-describedby="basic-addon1" style="margin-left:10px;">
+                                </div>
+
+                                <div class="input-group mb-3">
+                                    <label class="col-form-label col-md-2 ">Email</label>
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">@@</span>
+                                    </div>
+                                    <input type="email" id="Email" name="Email" class="form-control" placeholder="@Model.Email" value="@Model.Email" aria-label="Email" aria-describedby="basic-addon1">
+                                </div>
+
+                                <div class="input-group mb-3">
+                                    <label class="col-form-label col-md-2 ">Introductive Video</label>
+                                    <input type="file" class="form-control" name="upload" id="inputfile" value="@Model.IntrVideo">
+                                </div>
+                                <div class="input-group mb-3 col-md-10">
+                                    
+                                    <label class="col-form-label col-md-2 ">Your Expertise</label>
+                                    
+                                    <textarea  class="form-control" name="Experties" id="inputfile" placeholder="@Model.Experties" rows="10" style="margin-left:15px"></textarea>
+                                </div>
+                                
+                                <div class="input-group mb-3">
+
+                                    <div class="col-md-6"></div>
+                                    <input type="submit" class="btn btn-flat btn-primary btn-lg mb-3 col-md-6" value="Edit" style="width:300px" />
+
+                                </div>
+
+
+                            }
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

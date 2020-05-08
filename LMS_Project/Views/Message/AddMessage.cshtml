@@ -1,0 +1,52 @@
+﻿@using LMS_Project.ViewModels
+@{ 
+    List<UserMessage> messages = ViewBag.Messages as List<UserMessage>;
+}
+
+@using (Html.BeginForm("AddMessage", "Message", new { action = "AddMessage", controller = "Message" }, FormMethod.Post,new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    <div class="login-form-body">
+
+        @Html.Partial("Messages", messages)
+
+    </div>
+    <div class="submit-btn-area mt-5">
+        <div class="row">
+            <div class="col-md-6">
+                <textarea class="form-control inputt input-lg" rows="3" name="Text" style="padding:5px;" id="textmessage"></textarea>
+            </div>
+            <div class="col-md-2">
+              <input type="file" name="File"/>
+              
+            </div>
+            <div class="col-md-4">
+                <button id="form_submit" type="submit">Send <i class="ti-arrow-right"></i></button>
+            </div>
+        </div>
+        
+    </div>
+}
+@*<script src="~/Scripts/jquery-3.4.1.min" type="text/javascript">
+    document.getElementById('form_submit').click(function () {
+        var Text = document.getElementById('textmessage').value;
+        if (Text != null) {
+            $.ajax({
+                type: 'Get',
+                Url: '/Message/getMessages',
+                data: JSON.stringify(Text),
+                contentType: 'application/json;charset-8',
+                DataType: 'Json',
+                success: function (response) {
+                    alert(response.Text)
+                },
+                error: function (response) {
+                    alert(response.Text)
+                }
+            })
+        }
+
+    });
+  
+</script>*@
+

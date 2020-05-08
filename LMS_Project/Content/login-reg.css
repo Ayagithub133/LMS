@@ -1,0 +1,20 @@
+﻿body {
+    background-color:#ffffff;
+}
+.loginbody
+{
+    
+    box-shadow:10px 10px 10px 10px #dcdde1;
+    padding-bottom:20px;
+    padding-top:20px;
+    margin-top:60px;
+}
+.inputt {
+    border-radius: unset;
+   
+    width: 100%;
+}
+.login-btn {
+    background-color: #2980b9;
+    margin-top: 50px;
+}

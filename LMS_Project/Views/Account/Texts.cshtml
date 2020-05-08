@@ -1,0 +1,30 @@
+﻿
+@{
+    
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+    <div class="login-area">
+        <div class="container">
+            <div class="login-box ptb--100">
+                @using (Html.BeginForm("Texts", "Account", new { action = "Texts", controller = "Account" }, FormMethod.Get))
+                {
+
+                   
+                <div class="login-form-body">
+
+                    <div class="form-gp">
+                        <p>  @Session["Text"] </p>
+                  </div>
+                </div>
+                 <div class="submit-btn-area mt-5">
+                    <i class="ti-arrow-left"></i>
+                     @Html.ActionLink("Back", "ResetPassword", new { action = "ResetPassword", controller = "Account" })
+                 </div>
+                }
+                    
+            </div>
+                
+        </div>
+    </div>
+

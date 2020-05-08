@@ -1,0 +1,94 @@
+﻿
+@model   LMS_Project.Models.Course
+@{
+
+    Layout = "~/Views/Shared/_LayoutInstructor.cshtml";
+}
+      <body>
+        <div class="main-content-inner">
+            <div class="row">
+                <div class="col-lg-6 col-ml-12">
+                    <div class="row">
+                        
+                        <div class="col-12 mt-5">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h4 class="header-title">New Course</h4>
+
+                                    @using (Html.BeginForm("AddCourse", "Course", new { action = "AddCourse", controller = "Course" }, FormMethod.Post, new { enctype = "multipart/form-data" }))
+                                    {
+                                        <div class="input-group mb-3">
+                                            <label class="col-form-label col-md-2">Image Course</label>
+
+                                            
+                                                <input type="file" class="form-control" name="image" id="inputfile" >
+                                        </div>
+                                       
+                                        <div class="input-group mb-3">
+                                            <label class="col-form-label col-md-2 "> Title</label>
+
+                                            <input type="text" id="title" name="CourseTitle" class="form-control" placeholder="Course Title" aria-describedby="basic-addon1">
+                                        </div>
+                                        <div class="input-group mb-3">
+                                            <label class="col-form-label col-md-2 "> Select Category</label>
+                                            <select class=" form-control" name="CategoryId">
+                                                <option value="" disabled selected>Choose Your Option</option>
+                                                @foreach (var item in (List<SelectListItem>)ViewBag.CategoryList)
+                                                {
+                                                    <option value="@item.Value">@item.Text</option>
+                                                }
+
+                                            </select>
+                                        </div>
+                                        <div class="input-group mb-3">
+                                            <label class="col-form-label col-md-2 "> Duration</label>
+
+                                            <input type="text" id="Password" name="Duration" class="form-control" placeholder="Duration Of Course" aria-label="Duration" aria-describedby="basic-addon1">
+                                        </div>
+                                        <div class="input-group mb-3">
+                                            <label class="col-form-label col-md-2 ">Start Course</label>
+
+                                            <input type="date" id="Start" name="StartCourse" class="form-control" placeholder="Start Course" aria-label="Start Course" aria-describedby="basic-addon1">
+                                        </div>
+                                        <div class="input-group mb-3">
+                                            <label class="col-form-label col-md-2 ">End Course</label>
+
+                                            <input type="date" id="End" name="EndCourse" class="form-control" placeholder="End Course" aria-label="Start Course" aria-describedby="basic-addon1">
+                                        </div>
+                                        <div class="input-group mb-3">
+                                            <label class="col-form-label col-md-2 ">Price</label>
+
+                                            <input type="text" name="Price" class="form-control" id="Price" aria-describedby="basic-addon3" placeholder="Price">
+                                        </div>
+                                        <div class="input-group mb-3">
+                                            <label class="col-form-label col-md-2"> Level</label>
+                                            <select class=" form-control" name="Level">
+                                                <option value="" disabled selected>Choose Your Level</option>
+                                                <option value="0">Beginner</option>
+                                                <option value="1">InterMediate</option>
+                                                <option value="2">Advanced</option>
+                                            </select>
+                                        </div>
+                                        <div class="input-group mb-3">
+                                            <label class="col-form-label col-md-2 ">Description</label>
+
+                                            <textarea type="text" name="CourseDescription" class="form-control" id="CourseDescription" aria-describedby="basic-addon3" placeholder="CourseDescription" style="height:250px"></textarea>
+                                        </div>
+                                        <div class="input-group mb-3">
+
+                                            <div class="col-md-6"></div>
+                                            <input type="submit" class="btn btn-flat btn-primary btn-lg mb-3 col-md-6" value="Add Course" style="width:300px" />
+
+                                        </div>
+
+                                    }
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+          
+    </body>

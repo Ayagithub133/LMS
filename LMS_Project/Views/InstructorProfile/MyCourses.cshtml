@@ -1,0 +1,96 @@
+﻿@model LMS_Project.Models.Instructor
+@{
+    var count = 0;
+    var passdata = 0;
+}
+
+@using (Html.BeginForm("MyCourses", "Course", new { action = "MyCourses", controller = "Course" }, FormMethod.Get))
+{
+    Html.AntiForgeryToken();
+    <div class="main-content-inner">
+        <div class="card-area">
+            <div class="row">
+                @foreach (var item in Model.courses)
+                {
+                    passdata = item.Id;
+                    if (count != 0 && count % 4 == 0)
+                    {
+                    @:</div>
+                    @:<div class="row">
+                    }
+                    <div class="col-lg-4 col-md-6 mt-5">
+                        <div class="card card-bordered">
+                            <img class="card-img-top img-fluid" src="~/Upload/@item.CourseImage" alt="image" style="width:100%;height:200px" />
+                            <div class="card-body">
+                                <h5 class="title">@item.CourseDescription</h5>
+                                <p class="card-text">
+                                    @item.CourseDescription
+                                </p>
+                                <div class="row">
+                                    <div class="col-md-5">Price:</div>
+                                    <div class="col-md-5">@item.Price$</div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-5">Duration:</div>
+                                    <div class="col-md-5">@item.Duration Hours</div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-5">Date Start:</div>
+                                    <div class="col-md-5">@item.StartCourse</div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-5">Date End:</div>
+                                    <div class="col-md-5">@item.EndCourse</div>
+                                </div>
+
+                                @Html.ActionLink("Lessons", "getLessonsOfCourse", "Lesson", new { action = "getLessonsOfCourse", controller = "Lesson", id = item.Id }, new { @class = "btn btn-primary" })
+
+                                <div class="pull-right">
+
+                                    <h6 class="text-success dropdown-toggle" data-toggle="dropdown">Action</h6>
+                                    <div class="dropdown-menu">
+                                        @Html.ActionLink("Edit", "EditCourse", new { action = "EditCourse", controller = "Course", id = item.Id }, new { @class = "dropdown-item" })
+                                        
+                                        <button type="button" class="dropdown-item" data-toggle="modal" data-target="#exampleModal">Delete</button>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                }
+            </div>
+        </div>
+    </div>
+
+
+
+
+}
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel"></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                @using (Html.BeginForm("DeleteCourse", "Course", new { action = "DeleteCourse", controller = "Course" }, FormMethod.Post))
+                {
+                    <h5 class="text-danger" style="margin-top:50px;margin-bottom:50px;">
+                        Are You Sure ?
+                    </h5>
+                    <div class="modal-footer">
+                        <input type="hidden" value="@passdata" name="id"/>
+                        <input type="submit" class="btn btn-danger"  value="Delete" />
+                    </div>
+                }
+            </div>
+            
+        </div>
+    </div>
+</div>
+

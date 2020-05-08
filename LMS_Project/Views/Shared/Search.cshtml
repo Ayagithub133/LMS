@@ -1,0 +1,22 @@
+﻿
+    @using (Html.BeginForm("Search", "Account", new { action="Search",controller="Account"},FormMethod.Post))
+    {
+        <div class="row">
+            <div class="col-md-8">
+                <input type="search" name="Name" placeholder="Search By Name.." required style="width:320px">
+                <i class="ti-search"></i>
+            </div>
+
+            <div class="input-group col-md-4" style="width:150px">
+
+                <select class=" form-control" name="Type">
+
+                    <option disabled selected>Search On</option>
+                    <option value="Student">Student</option>
+                    <option value="Instructor">Instructor</option>
+                </select>
+            </div>
+        </div>
+
+
+    }

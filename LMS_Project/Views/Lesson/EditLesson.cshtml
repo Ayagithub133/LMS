@@ -1,0 +1,88 @@
+﻿@model LMS_Project.Models.Lesson
+
+
+
+<body>
+    <div class="main-content-inner">
+        <div class="row">
+            <div class="col-lg-6 col-ml-12">
+                <div class="row">
+
+                    <div class="col-12 mt-5">
+                        <div class="card">
+                            <div class="card-body">
+                                <h4 class="header-title">Edit Lesson</h4>
+
+                                @using (Html.BeginForm("EditLesson", "Lesson", new { action = "EditLesson", controller = "Lesson" }, FormMethod.Post, new { enctype = "multipart/form-data" }))
+                                {
+                                    <div class="input-group mb-3">
+                                        <div class="row">
+                                            <div class="col-md-2" style="margin-bottom:5px"></div>
+                                                <div class="col-md-4 " style="margin-bottom:10px">
+                                                    <img class="img-fluid img-thumbnail" src="~/Upload/@Model.LessonImage" />
+                                                </div>
+                                            </div>
+                                            <label class="col-form-label col-md-2 ">UPLOAD Image</label>
+
+                                            <input type="file" id="image" class="form-control" aria-describedby="basic-addon1" name="upload" value="@Model.LessonImage">
+                                        </div>
+                                    <div class="input-group mb-3">
+                                        <label class="col-form-label col-md-2 "> TITLE</label>
+
+                                        <input type="text" id="title" name="LessonTitle" class="form-control" placeholder="@Model.LessonTitle" value="@Model.LessonTitle" aria-describedby="basic-addon1">
+                                    </div>
+                                    <div class="input-group mb-3">
+                                        <label class="col-form-label col-md-2 "> COURSE</label>
+                                        <select class=" form-control" name="Id">
+                                            @*<option  selected>Edit Option</option>*@
+                                            @foreach (var item in (List<SelectListItem>)ViewBag.CoursesList)
+                                            {
+                                                if (item.Text == (string)ViewBag.Lesson)
+                                                {
+                                                    <option value="@item.Value" selected>@item.Text</option>
+                                                }
+                                                else
+                                                {
+                                                    <option value="@item.Value" >@item.Text</option>
+                                                }
+                                            }
+                                        </select>
+                                    </div>
+
+                                    <div class="input-group mb-3">
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <div class="embed-responsive embed-responsive-21by9">
+                                                    <video class="embed-responsive-item" controls>
+                                                        <source src="~/Videos/@Model.video" type="video/mp4" />
+                                                    </video>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <label class="col-form-label col-md-2 ">UPLOAD VIDEO</label>
+
+                                        <input type="file" id="video" class="form-control" aria-describedby="basic-addon1" name="upload" value="@Model.video" placeholder="@Model.video">
+                                    </div>
+                                    <div class="input-group mb-3">
+                                        <label class="col-form-label col-md-2 ">UPLOAD LESSON FILE</label>
+
+                                        <input type="file" id="files" class="form-control" aria-label="lesson Files " aria-describedby="basic-addon1" name="upload" value="@Model.TextContent">
+                                    </div>
+                                    <input type="hidden" name="LessonId" value="@Model.LessonId" />
+                                    <div class="input-group mb-3">
+
+                                        <div class="col-md-6"></div>
+                                        <input type="submit" class="btn btn-flat btn-primary btn-lg mb-3 col-md-6" value="Edit" style="width:300px" />
+
+                                    </div>
+
+                                }
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
